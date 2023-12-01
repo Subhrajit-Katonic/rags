@@ -44,18 +44,18 @@ def _resolve_llm(llm_str: str) -> LLM:
     # - if there is, resolve it
     tokens = llm_str.split(":")
     if len(tokens) == 1:
-        os.environ["OPENAI_API_KEY"] = st.secrets.openai_key
+        # os.environ["OPENAI_API_KEY"] = st.secrets.openai_key
         llm: LLM = OpenAI(model=llm_str)
     elif tokens[0] == "local":
         llm = resolve_llm(llm_str)
     elif tokens[0] == "openai":
-        os.environ["OPENAI_API_KEY"] = st.secrets.openai_key
+        # os.environ["OPENAI_API_KEY"] = st.secrets.openai_key
         llm = OpenAI(model=tokens[1])
     elif tokens[0] == "anthropic":
-        os.environ["ANTHROPIC_API_KEY"] = st.secrets.anthropic_key
+        # os.environ["ANTHROPIC_API_KEY"] = st.secrets.anthropic_key
         llm = Anthropic(model=tokens[1])
     elif tokens[0] == "replicate":
-        os.environ["REPLICATE_API_KEY"] = st.secrets.replicate_key
+        # os.environ["REPLICATE_API_KEY"] = st.secrets.replicate_key
         llm = Replicate(model=tokens[1])
     else:
         raise ValueError(f"LLM {llm_str} not recognized.")
